@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduTech Mastery | Teacher E-Learning</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        unimapBlue: '#004aad',
+                        unimapGold: '#ffb703',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar for a polished look */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        /* Animasi untuk pertukaran halaman */
+        .fade-in {
+            animation: fadeIn 0.4s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .page-section { display: none; }
+        .page-section.active { display: block; }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <nav class="bg-unimapBlue text-white sticky top-0 z-50 shadow-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="showPage('page-home')">
+                    <i class="ph ph-graduation-cap text-3xl text-unimapGold"></i>
+                    <span class="font-bold text-xl tracking-tight">EduTech Mastery</span>
+                </div>
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-6">
+                        <a href="#" onclick="showPage('page-home')" class="hover:text-unimapGold px-3 py-2 rounded-md text-sm font-medium transition-colors">Laman Utama</a>
+                        <a href="#" onclick="showPage('page-concept')" class="hover:text-unimapGold px-3 py-2 rounded-md text-sm font-medium transition-colors">Modul Semasa</a>
+                        <a href="#" onclick="showPage('page-assessment')" class="hover:text-unimapGold px-3 py-2 rounded-md text-sm font-medium transition-colors">Penilaian</a>
+                        <a href="#" onclick="showPage('page-conclusion')" class="bg-unimapGold text-unimapBlue hover:bg-yellow-400 px-4 py-2 rounded-md text-sm font-bold transition-colors">Sertai Perbincangan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex flex-col md:flex-row gap-8">
+        
+        <aside class="md:w-1/4 hidden md:block">
+            <div class="sticky top-24 glass-panel p-6 rounded-xl shadow-sm">
+                <h3 class="font-bold text-lg border-b pb-2 mb-4">Kandungan Modul</h3>
+                <ul class="space-y-3 text-sm" id="sidebar-menu">
+                    <li><a href="#" onclick="showPage('page-home')" id="nav-page-home" class="flex items-center gap-2 text-unimapBlue font-bold"><i class="ph ph-house"></i> Laman Utama</a></li>
+                    <li><a href="#" onclick="showPage('page-concept')" id="nav-page-concept" class="flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium"><i class="ph ph-book-open"></i> Konsep Topik</a></li>
+                    <li><a href="#" onclick="showPage('page-objectives')" id="nav-page-objectives" class="flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium"><i class="ph ph-target"></i> Objektif Pembelajaran</a></li>
+                    <li><a href="#" onclick="showPage('page-multimedia')" id="nav-page-multimedia" class="flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium"><i class="ph ph-monitor-play"></i> Bahan Kuliah</a></li>
+                    <li><a href="#" onclick="showPage('page-activity')" id="nav-page-activity" class="flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium"><i class="ph ph-flask"></i> Hasilkan RPH Anda</a></li>
+                    <li><a href="#" onclick="showPage('page-assessment')" id="nav-page-assessment" class="flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium"><i class="ph ph-check-circle"></i> Penilaian Interaktif</a></li>
+                    <li><a href="#" onclick="showPage('page-conclusion')" id="nav-page-conclusion" class="flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium"><i class="ph ph-flag-checkered"></i> Kesimpulan & Forum</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="md:w-3/4 min-h-[60vh]" id="module">
+            
+            <section id="page-home" class="page-section active fade-in">
+                <div class="relative bg-unimapBlue text-white overflow-hidden rounded-2xl shadow-lg">
+                    <div class="absolute inset-0 opacity-30 bg-[url('https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80')] bg-cover bg-center"></div>
+                    <div class="px-8 py-20 relative z-10">
+                        <span class="text-unimapGold font-bold tracking-wider uppercase text-sm mb-2 block">Modul Pembangunan Profesional</span>
+                        <h1 class="text-3xl md:text-5xl font-extrabold leading-tight mb-6">
+                            Perkasakan Bilik Darjah Anda: Menguasai Gamifikasi dalam Pendidikan
+                        </h1>
+                        <p class="text-lg text-blue-100 mb-8 max-w-2xl">
+                            Tingkatkan penglibatan pelajar, jadikan pembelajaran menyeronokkan, dan ubah suasana kelas anda. Ketahui cara mengintegrasikan elemen permainan secara berkesan dalam pengajaran harian anda.
+                        </p>
+                        <button onclick="showPage('page-concept')" class="inline-flex items-center gap-2 bg-unimapGold text-unimapBlue font-bold py-3 px-8 rounded-full hover:bg-yellow-400 transition-transform transform hover:-translate-y-1 shadow-lg">
+                            Mula Belajar Modul <i class="ph ph-arrow-right font-bold"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center cursor-pointer hover:shadow-md transition-shadow" onclick="showPage('page-concept')">
+                        <i class="ph ph-book-open text-4xl text-unimapBlue mb-3"></i>
+                        <h3 class="font-bold text-gray-900 text-sm">1. Konsep</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center cursor-pointer hover:shadow-md transition-shadow" onclick="showPage('page-multimedia')">
+                        <i class="ph ph-video-camera text-4xl text-red-500 mb-3"></i>
+                        <h3 class="font-bold text-gray-900 text-sm">2. Bahan</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center cursor-pointer hover:shadow-md transition-shadow" onclick="showPage('page-activity')">
+                        <i class="ph ph-flask text-4xl text-green-500 mb-3"></i>
+                        <h3 class="font-bold text-gray-900 text-sm">3. Hasilkan RPH Anda</h3>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100 text-center cursor-pointer hover:shadow-md transition-shadow" onclick="showPage('page-assessment')">
+                        <i class="ph ph-exam text-4xl text-unimapGold mb-3"></i>
+                        <h3 class="font-bold text-gray-900 text-sm">4. Penilaian</h3>
+                    </div>
+                </div>
+            </section>
+
+            <section id="page-concept" class="page-section fade-in bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="bg-blue-100 p-2 rounded-lg text-unimapBlue"><i class="ph ph-lightbulb text-2xl"></i></div>
+                    <h2 class="text-2xl font-bold text-gray-900">1. Topik: Pengenalan kepada Gamifikasi dalam Pendidikan</h2>
+                </div>
+                <div class="prose max-w-none text-gray-600 leading-relaxed">
+                    <p class="mb-4">Selamat datang, Pendidik! Pelajar hari ini mudah hilang tumpuan jika kaedah pengajaran bersifat sehala. Di sinilah <strong>Gamifikasi</strong> memainkan peranan yang sangat penting.</p>
+                    <p>Gamifikasi bukanlah sekadar membenarkan pelajar bermain permainan di dalam kelas, tetapi ia adalah penerapan elemen dan prinsip reka bentuk permainan (seperti mata ganjaran, lencana, papan pendahulu, dan cabaran) ke dalam persekitaran pembelajaran harian. Modul ini direka untuk membantu anda memahami cara melaksanakan gamifikasi untuk meningkatkan motivasi pelajar dan pencapaian akademik secara holistik.</p>
+                </div>
+                <div class="mt-8 flex justify-end">
+                    <button onclick="showPage('page-objectives')" class="flex items-center gap-2 bg-gray-100 hover:bg-gray-200 text-gray-800 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        Seterusnya: Objektif <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="page-objectives" class="page-section fade-in bg-blue-50 p-8 rounded-2xl border-l-4 border-unimapBlue">
+                <h2 class="text-2xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+                    <i class="ph ph-target text-unimapBlue"></i> Objektif Modul
+                </h2>
+                <p class="text-gray-700 mb-4">Setelah menamatkan modul ini, anda akan dapat:</p>
+                <ul class="space-y-3">
+                    <li class="flex items-start gap-3">
+                        <i class="ph-fill ph-check-circle text-green-500 mt-1"></i>
+                        <span class="text-gray-700"><strong>Memahami</strong> konsep asas gamifikasi dan perbezaannya dengan pembelajaran berasaskan permainan sebenar (game-based learning).</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="ph-fill ph-check-circle text-green-500 mt-1"></i>
+                        <span class="text-gray-700"><strong>Mengaplikasi</strong> sekurang-kurangnya tiga elemen permainan (seperti Lencana dan Papan Pendahulu) ke dalam perancangan bebas Rancangan Pengajaran Harian (RPH).</span>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i class="ph-fill ph-check-circle text-green-500 mt-1"></i>
+                        <span class="text-gray-700"><strong>Menilai</strong> penggunaan platform digital (seperti Quizizz, Kahoot!, atau ClassDojo) untuk mewujudkan persekitaran persaingan yang sihat dan positif.</span>
+                    </li>
+                </ul>
+                <div class="mt-8 flex justify-between">
+                    <button onclick="showPage('page-concept')" class="flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        <i class="ph ph-arrow-left"></i> Kembali
+                    </button>
+                    <button onclick="showPage('page-multimedia')" class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                        Seterusnya: Bahan Kuliah <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="page-multimedia" class="page-section fade-in space-y-8">
+                <h2 class="text-3xl font-bold text-gray-900 border-b-2 border-gray-200 pb-2">Bahan Pembelajaran Terkini</h2>
+                
+                <!-- Infografik HTML Bina Khas -->
+                <div class="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl md:text-2xl font-bold mb-6 text-center border-b pb-4 text-gray-800">Infografik: Anatomi Gamifikasi Pendidikan</h3>
+                    
+                    <!-- Definisi -->
+                    <div class="bg-blue-50 rounded-xl p-4 md:p-6 text-center mb-8 border border-blue-100 shadow-inner">
+                        <p class="text-unimapBlue font-semibold text-sm md:text-base">
+                            <i class="ph-fill ph-lightbulb text-yellow-500 mr-2 text-xl align-middle"></i>
+                            <strong>Gamifikasi</strong> bukanlah sekadar bermain 'game', tetapi ia adalah proses mengekstrak <em>keseronokan</em> dan <em>daya tarikan</em> dari permainan dan mengaplikasikannya ke dalam aktiviti pengajaran harian.
+                        </p>
+                    </div>
+
+                    <!-- 3 Tonggak Utama (Pillars) -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                        <!-- Dinamik -->
+                        <div class="bg-gradient-to-b from-purple-50 to-purple-100 p-6 rounded-xl border border-purple-200 text-center relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <div class="absolute -right-4 -top-4 opacity-10 text-7xl"><i class="ph-fill ph-brain"></i></div>
+                            <div class="w-14 h-14 bg-purple-500 text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-md"><i class="ph-fill ph-brain"></i></div>
+                            <h4 class="font-bold text-purple-900 text-lg mb-2">Dinamik (Konsep)</h4>
+                            <p class="text-xs text-purple-800 font-medium mb-4">Gambaran besar dan struktur abstrak yang memotivasikan emosi pelajar.</p>
+                            <ul class="text-sm text-purple-900 mt-3 text-left space-y-2 bg-white/50 p-3 rounded-lg">
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-purple-500"></i> Jalan Cerita / Naratif</li>
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-purple-500"></i> Emosi (Keterujaan/Misteri)</li>
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-purple-500"></i> Perkembangan Kemahiran</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Mekanik -->
+                        <div class="bg-gradient-to-b from-blue-50 to-blue-100 p-6 rounded-xl border border-blue-200 text-center relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <div class="absolute -right-4 -top-4 opacity-10 text-7xl"><i class="ph-fill ph-gear"></i></div>
+                            <div class="w-14 h-14 bg-blue-500 text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-md"><i class="ph-fill ph-gear"></i></div>
+                            <h4 class="font-bold text-blue-900 text-lg mb-2">Mekanik (Proses)</h4>
+                            <p class="text-xs text-blue-800 font-medium mb-4">Proses asas dan peraturan yang memacu penglibatan murid untuk bertindak.</p>
+                            <ul class="text-sm text-blue-900 mt-3 text-left space-y-2 bg-white/50 p-3 rounded-lg">
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-blue-500"></i> Cabaran & Misi</li>
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-blue-500"></i> Kerjasama / Persaingan</li>
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-blue-500"></i> Maklum Balas Segera</li>
+                            </ul>
+                        </div>
+                        
+                        <!-- Komponen -->
+                        <div class="bg-gradient-to-b from-yellow-50 to-yellow-100 p-6 rounded-xl border border-yellow-200 text-center relative overflow-hidden hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
+                            <div class="absolute -right-4 -top-4 opacity-10 text-7xl"><i class="ph-fill ph-trophy"></i></div>
+                            <div class="w-14 h-14 bg-yellow-500 text-white rounded-full flex items-center justify-center text-3xl mx-auto mb-4 shadow-md"><i class="ph-fill ph-trophy"></i></div>
+                            <h4 class="font-bold text-yellow-900 text-lg mb-2">Komponen (Fizikal)</h4>
+                            <p class="text-xs text-yellow-800 font-medium mb-4">Elemen praktikal yang boleh dilihat dan dikumpulkan oleh pelajar di dalam kelas.</p>
+                            <ul class="text-sm text-yellow-900 mt-3 text-left space-y-2 bg-white/50 p-3 rounded-lg">
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-yellow-500"></i> Mata Ganjaran (Points)</li>
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-yellow-500"></i> Lencana (Badges)</li>
+                                <li class="flex items-center gap-2"><i class="ph-fill ph-check-circle text-yellow-500"></i> Papan Pendahulu</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Impak / Hasil -->
+                    <div class="border-t border-gray-200 pt-6">
+                        <h4 class="text-center text-xs font-bold text-gray-500 uppercase tracking-widest mb-4">Impak Kepada Pelajar</h4>
+                        <div class="flex flex-wrap justify-center gap-4 md:gap-8">
+                            <div class="flex items-center gap-2 bg-green-50 px-4 py-2 rounded-full border border-green-200"><i class="ph-fill ph-trend-up text-green-600 text-xl"></i><span class="text-sm font-bold text-green-800">Motivasi Intrinsik Meningkat</span></div>
+                            <div class="flex items-center gap-2 bg-blue-50 px-4 py-2 rounded-full border border-blue-200"><i class="ph-fill ph-users-three text-blue-600 text-xl"></i><span class="text-sm font-bold text-blue-800">Penglibatan Aktif Keseluruhan</span></div>
+                            <div class="flex items-center gap-2 bg-yellow-50 px-4 py-2 rounded-full border border-yellow-200"><i class="ph-fill ph-smiley text-yellow-600 text-xl"></i><span class="text-sm font-bold text-yellow-800">Pembelajaran Tanpa Tekanan</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2"><i class="ph ph-video-camera text-red-500"></i> Video Pembelajaran: Pelaksanaan Gamifikasi Interaktif</h3>
+                    <p class="text-sm text-gray-600 mb-4">Tonton demonstrasi visual ini tentang cara mengubah lembaran kerja tradisional yang membosankan kepada kuiz interaktif yang dapat mendebarkan dan mencabar minda pelajar.</p>
+                    
+                    <!-- Video Container with Real YouTube Thumbnail -->
+                    <div id="video-container" class="relative w-full aspect-video md:h-96 rounded-xl overflow-hidden shadow-lg border-2 border-gray-200 bg-black group cursor-pointer flex items-center justify-center" onclick="playVideo()">
+                        <!-- Menarik gambar thumbnail secara terus dari ID video YouTube -->
+                        <img src="https://img.youtube.com/vi/UQ8iLLl3kyQ/maxresdefault.jpg" onerror="this.src='https://img.youtube.com/vi/UQ8iLLl3kyQ/hqdefault.jpg'" alt="Thumbnail Video Gamifikasi" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:opacity-100 transition-opacity">
+                        
+                        <!-- Custom Play Button Overlay -->
+                        <div class="absolute inset-0 flex items-center justify-center bg-black/30 group-hover:bg-black/10 transition-all">
+                            <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center shadow-2xl group-hover:scale-110 transition-transform">
+                                <i class="ph-fill ph-play text-white text-3xl ml-1"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="mt-8 flex justify-between">
+                    <button onclick="showPage('page-objectives')" class="flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        <i class="ph ph-arrow-left"></i> Kembali
+                    </button>
+                    <button onclick="showPage('page-activity')" class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                        Seterusnya: Hasilkan RPH Anda <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <!-- PAGE: ACTIVITY (UPDATED: CUSTOM RPH BUILDER) -->
+            <section id="page-activity" class="page-section fade-in bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                        <i class="ph ph-flask text-green-600"></i> Pembina RPH Bebas (Amali)
+                    </h2>
+                    <span class="bg-green-100 text-green-800 text-xs font-bold px-3 py-1 rounded-full">Kreatif</span>
+                </div>
+                
+                <p class="text-gray-600 mb-6"><strong>Objektif:</strong> Rancang satu aktiviti RPH mengikut subjek anda. Kemudian, pilih sekurang-kurangnya 3 elemen gamifikasi dan tuliskan bagaimana anda akan mengintegrasikannya.</p>
+
+                <div class="space-y-8">
+                    <!-- Bahagian 1: Asas RPH -->
+                    <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
+                        <h3 class="font-bold text-gray-800 border-b pb-2 mb-4 flex items-center gap-2">
+                            <i class="ph ph-file-text text-unimapBlue"></i> Langkah 1: Maklumat RPH Asas
+                        </h3>
+                        <div class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Mata Pelajaran & Topik</label>
+                                <input type="text" id="rph-topic" class="w-full border-2 border-gray-200 rounded-lg p-3 focus:ring-0 focus:border-unimapBlue outline-none transition-colors" placeholder="Cth: Sejarah Tahun 4 (Zaman Prasejarah)">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-bold text-gray-700 mb-1">Aktiviti Tradisional (Sebelum Gamifikasi)</label>
+                                <textarea id="rph-original" rows="3" class="w-full border-2 border-gray-200 rounded-lg p-3 focus:ring-0 focus:border-unimapBlue outline-none transition-colors" placeholder="Cth: Guru bercerita di hadapan kelas dan murid menyalin nota dari papan putih..."></textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bahagian 2: Pilihan Gamifikasi -->
+                    <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                        <div class="flex items-center justify-between border-b border-blue-300 pb-2 mb-4">
+                            <h3 class="font-bold text-gray-800 flex items-center gap-2">
+                                <i class="ph ph-backpack text-unimapBlue"></i> Langkah 2: Suntikan Gamifikasi
+                            </h3>
+                            <span class="text-sm font-bold text-gray-700 bg-white px-3 py-1 rounded-full shadow-sm">Pilih: <span id="selected-count" class="text-unimapBlue">0</span> / 3 (Minima)</span>
+                        </div>
+                        <p class="text-xs text-gray-600 mb-4">Klik elemen yang ingin dimasukkan ke dalam RPH anda:</p>
+                        
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3" id="gamification-inventory">
+                            <button onclick="toggleElement('Mata Ganjaran', this)" class="game-element text-left bg-white border-2 border-gray-200 p-3 rounded-lg hover:border-unimapGold hover:shadow-sm transition-all flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600"><i class="ph-fill ph-coin text-xl"></i></div>
+                                <span class="text-sm font-semibold text-gray-700">Mata Ganjaran</span>
+                            </button>
+                            <button onclick="toggleElement('Lencana Keahlian', this)" class="game-element text-left bg-white border-2 border-gray-200 p-3 rounded-lg hover:border-purple-400 hover:shadow-sm transition-all flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-purple-100 flex items-center justify-center text-purple-600"><i class="ph-fill ph-medal text-xl"></i></div>
+                                <span class="text-sm font-semibold text-gray-700">Lencana Keahlian</span>
+                            </button>
+                            <button onclick="toggleElement('Papan Pendahulu', this)" class="game-element text-left bg-white border-2 border-gray-200 p-3 rounded-lg hover:border-blue-400 hover:shadow-sm transition-all flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-blue-100 flex items-center justify-center text-blue-600"><i class="ph-fill ph-chart-bar text-xl"></i></div>
+                                <span class="text-sm font-semibold text-gray-700">Papan Pendahulu</span>
+                            </button>
+                            <button onclick="toggleElement('Misi Bermasa', this)" class="game-element text-left bg-white border-2 border-gray-200 p-3 rounded-lg hover:border-red-400 hover:shadow-sm transition-all flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600"><i class="ph-fill ph-timer text-xl"></i></div>
+                                <span class="text-sm font-semibold text-gray-700">Misi Bermasa</span>
+                            </button>
+                            <button onclick="toggleElement('Avatar Pelajar', this)" class="game-element text-left bg-white border-2 border-gray-200 p-3 rounded-lg hover:border-green-400 hover:shadow-sm transition-all flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-green-100 flex items-center justify-center text-green-600"><i class="ph-fill ph-user-focus text-xl"></i></div>
+                                <span class="text-sm font-semibold text-gray-700">Avatar Pelajar</span>
+                            </button>
+                            <button onclick="toggleElement('Ganjaran Misteri', this)" class="game-element text-left bg-white border-2 border-gray-200 p-3 rounded-lg hover:border-orange-400 hover:shadow-sm transition-all flex items-center gap-2">
+                                <div class="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-orange-600"><i class="ph-fill ph-gift text-xl"></i></div>
+                                <span class="text-sm font-semibold text-gray-700">Ganjaran Misteri</span>
+                            </button>
+                        </div>
+
+                        <!-- Bahagian 3: Aplikasi -->
+                        <div class="mt-6 border-t border-blue-200 pt-4">
+                            <label class="block text-sm font-bold text-gray-700 mb-2 flex items-center gap-2">
+                                <i class="ph ph-pen-nib"></i> Langkah 3: Perancangan Aplikasi Gamifikasi (Selepas Gamifikasi)
+                            </label>
+                            <textarea id="rph-new" rows="4" class="w-full border-2 border-blue-200 bg-white rounded-lg p-3 focus:ring-0 focus:border-unimapBlue outline-none transition-colors" placeholder="Huraikan langkah demi langkah bagaimana anda mengubah aktiviti asal menggunakan elemen yang telah anda pilih di atas. Cth: Murid akan dibahagikan kepada kumpulan (Avatar). Setiap jawapan betul akan diberikan 10 Mata Ganjaran. Kumpulan tertinggi dipaparkan di Papan Pendahulu..."></textarea>
+                        </div>
+                        
+                        <!-- Ralat Mesej -->
+                        <div id="rph-error" class="hidden mt-3 text-red-600 text-sm font-bold flex items-center gap-2">
+                            <i class="ph-fill ph-warning-circle"></i> Sila isi semua ruangan dan pilih sekurang-kurangnya 3 elemen gamifikasi.
+                        </div>
+
+                        <div class="mt-4 flex justify-end">
+                            <button id="btn-generate" onclick="generateCustomRPH()" class="bg-unimapBlue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors shadow-md flex items-center gap-2">
+                                <i class="ph ph-magic-wand"></i> Jana Kad RPH
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kad Keputusan (Paparan RPH Baharu) -->
+                <div id="rph-result" class="hidden mt-8 p-1 bg-gradient-to-br from-unimapGold to-yellow-500 rounded-xl shadow-lg">
+                    <div class="bg-white p-8 rounded-lg h-full">
+                        <div class="flex justify-between items-start border-b-2 border-gray-200 pb-4 mb-6">
+                            <div>
+                                <h3 class="text-2xl font-black text-gray-900 uppercase tracking-wide">Rancangan Pengajaran Harian</h3>
+                                <p class="text-unimapBlue font-bold mt-1">Versi Gamifikasi</p>
+                            </div>
+                            <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center border-2 border-green-500 text-green-600">
+                                <i class="ph-fill ph-seal-check text-3xl"></i>
+                            </div>
+                        </div>
+
+                        <div class="space-y-5 text-gray-800">
+                            <div>
+                                <span class="text-xs uppercase text-gray-500 font-bold tracking-wider">Mata Pelajaran & Topik</span>
+                                <p id="res-topic" class="font-semibold text-lg border-l-4 border-unimapBlue pl-3 mt-1"></p>
+                            </div>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                                <div>
+                                    <span class="text-xs uppercase text-gray-500 font-bold tracking-wider">Aktiviti Tradisional</span>
+                                    <p id="res-original" class="text-sm mt-1 text-gray-600 line-through decoration-red-400 decoration-2"></p>
+                                </div>
+                                <div>
+                                    <span class="text-xs uppercase text-unimapBlue font-bold tracking-wider">Elemen Digunakan</span>
+                                    <div id="res-elements" class="flex flex-wrap gap-2 mt-2">
+                                        <!-- Dijana melalui JS -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <span class="text-xs uppercase text-gray-500 font-bold tracking-wider">Aktiviti Gamifikasi Baharu</span>
+                                <p id="res-new" class="text-sm mt-2 leading-relaxed bg-blue-50 p-4 rounded-lg border border-blue-100"></p>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 pt-4 border-t border-gray-200 flex justify-end gap-3">
+                            <button class="bg-gray-100 text-gray-700 hover:bg-gray-200 font-semibold py-2 px-4 rounded transition-colors text-sm flex items-center gap-2">
+                                <i class="ph ph-printer"></i> Cetak RPH
+                            </button>
+                            <button onclick="document.getElementById('rph-result').classList.add('hidden')" class="bg-gray-900 text-white hover:bg-gray-800 font-semibold py-2 px-4 rounded transition-colors text-sm">
+                                Tutup Paparan
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-12 flex justify-between">
+                    <button onclick="showPage('page-multimedia')" class="flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        <i class="ph ph-arrow-left"></i> Kembali
+                    </button>
+                    <button onclick="showPage('page-assessment')" class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                        Seterusnya: Penilaian <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="page-assessment" class="page-section fade-in bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                
+                <div class="mb-8">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                            <i class="ph ph-exam text-unimapBlue"></i> Bahagian A: Ujian Kefahaman
+                        </h2>
+                        <span class="bg-blue-100 text-unimapBlue text-xs font-bold px-3 py-1 rounded-full">Kuiz</span>
+                    </div>
+                    <p class="text-gray-600 mb-6">Uji pemahaman anda mengenai kandungan pedagogi modul ini. Pilih jawapan yang paling tepat.</p>
+
+                    <form id="quizForm" class="space-y-6">
+                        <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                            <p class="font-semibold text-gray-800 mb-3">1. Apakah definisi terbaik bagi Gamifikasi dalam pendidikan?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-100 rounded">
+                                    <input type="radio" name="q1" value="wrong" class="text-unimapBlue focus:ring-unimapBlue">
+                                    <span>Membenarkan pelajar bermain permainan video seperti Minecraft secara bebas.</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-100 rounded">
+                                    <input type="radio" name="q1" value="correct" class="text-unimapBlue focus:ring-unimapBlue">
+                                    <span>Penerapan elemen reka bentuk permainan dalam konteks pembelajaran untuk memotivasikan pelajar.</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-100 rounded">
+                                    <input type="radio" name="q1" value="wrong" class="text-unimapBlue focus:ring-unimapBlue">
+                                    <span>Menggantikan buku teks sepenuhnya dengan aplikasi telefon pintar.</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="bg-gray-50 p-5 rounded-lg border border-gray-200">
+                            <p class="font-semibold text-gray-800 mb-3">2. Antara berikut, yang manakah BUKAN komponen utama dalam mekanik gamifikasi?</p>
+                            <div class="space-y-2">
+                                <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-100 rounded">
+                                    <input type="radio" name="q2" value="wrong" class="text-unimapBlue focus:ring-unimapBlue">
+                                    <span>Sistem Mata Ganjaran (Points) dan Lencana (Badges)</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-100 rounded">
+                                    <input type="radio" name="q2" value="wrong" class="text-unimapBlue focus:ring-unimapBlue">
+                                    <span>Papan Pendahulu (Leaderboards)</span>
+                                </label>
+                                <label class="flex items-center gap-3 cursor-pointer p-2 hover:bg-gray-100 rounded">
+                                    <input type="radio" name="q2" value="correct" class="text-unimapBlue focus:ring-unimapBlue">
+                                    <span>Membaca esei secara senyap di meja masing-masing</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="button" onclick="submitQuiz()" class="bg-unimapBlue text-white font-bold py-3 px-6 rounded-lg hover:bg-blue-800 transition-colors w-full md:w-auto">
+                            Hantar Jawapan Kuiz
+                        </button>
+                    </form>
+                    <div id="quizResult" class="hidden mt-6 p-4 rounded-lg border"></div>
+                </div>
+
+                <div class="mt-12 border-t border-gray-200 pt-10">
+                    <div class="flex items-center justify-between mb-6">
+                        <h2 class="text-2xl font-bold text-gray-900 flex items-center gap-2">
+                            <i class="ph ph-chart-bar text-unimapGold"></i> Bahagian B: Undian Terkini (Live Poll)
+                        </h2>
+                        <span class="bg-yellow-100 text-yellow-800 text-xs font-bold px-3 py-1 rounded-full">Interaktif</span>
+                    </div>
+                    
+                    <p class="text-gray-600 mb-6 border-l-4 border-unimapGold pl-4 bg-gray-50 py-3 pr-3 rounded-r-lg">
+                        <strong>Undian Komuniti:</strong> Platform gamifikasi manakah yang paling berkesan dan kerap anda gunakan di dalam bilik darjah? Undi untuk melihat statistik pilihan rakan guru yang lain.
+                    </p>
+
+                    <!-- Pilihan Undian -->
+                    <div id="pollOptions" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <button onclick="submitPoll('Kahoot!')" class="group flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 hover:border-purple-600 hover:bg-purple-50 transition-all text-left">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-purple-600 text-white font-bold flex items-center justify-center text-xl shadow-sm">K!</div>
+                                <span class="font-bold text-gray-800 group-hover:text-purple-700">Kahoot!</span>
+                            </div>
+                            <i class="ph ph-hand-pointing text-gray-300 group-hover:text-purple-600 text-2xl transition-colors"></i>
+                        </button>
+
+                        <button onclick="submitPoll('Quizizz')" class="group flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 hover:border-purple-500 hover:bg-purple-50 transition-all text-left">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-purple-500 text-white font-bold flex items-center justify-center text-xl shadow-sm">Q</div>
+                                <span class="font-bold text-gray-800 group-hover:text-purple-700">Quizizz</span>
+                            </div>
+                            <i class="ph ph-hand-pointing text-gray-300 group-hover:text-purple-500 text-2xl transition-colors"></i>
+                        </button>
+
+                        <button onclick="submitPoll('ClassDojo')" class="group flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 hover:border-green-500 hover:bg-green-50 transition-all text-left">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-green-400 text-white font-bold flex items-center justify-center shadow-sm"><i class="ph-fill ph-ghost text-2xl"></i></div>
+                                <span class="font-bold text-gray-800 group-hover:text-green-700">ClassDojo</span>
+                            </div>
+                            <i class="ph ph-hand-pointing text-gray-300 group-hover:text-green-500 text-2xl transition-colors"></i>
+                        </button>
+
+                        <button onclick="submitPoll('Google Classroom')" class="group flex items-center justify-between p-4 rounded-xl border-2 border-gray-200 hover:border-yellow-500 hover:bg-yellow-50 transition-all text-left">
+                            <div class="flex items-center gap-3">
+                                <div class="w-10 h-10 rounded bg-yellow-500 text-white font-bold flex items-center justify-center shadow-sm"><i class="ph-fill ph-chalkboard-teacher text-2xl"></i></div>
+                                <span class="font-bold text-gray-800 group-hover:text-yellow-700">Google Classroom</span>
+                            </div>
+                            <i class="ph ph-hand-pointing text-gray-300 group-hover:text-yellow-500 text-2xl transition-colors"></i>
+                        </button>
+                    </div>
+
+                    <div id="pollResults" class="hidden bg-gray-50 p-6 rounded-xl border border-gray-200">
+                    </div>
+                </div>
+                
+                <div class="mt-12 flex justify-between">
+                    <button onclick="showPage('page-activity')" class="flex items-center gap-2 bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold py-2 px-6 rounded-lg transition-colors">
+                        <i class="ph ph-arrow-left"></i> Kembali
+                    </button>
+                    <button onclick="showPage('page-conclusion')" class="flex items-center gap-2 bg-gray-900 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded-lg transition-colors">
+                        Seterusnya: Kesimpulan <i class="ph ph-arrow-right"></i>
+                    </button>
+                </div>
+            </section>
+
+            <section id="page-conclusion" class="page-section fade-in space-y-6">
+                <div class="bg-gradient-to-r from-unimapBlue to-blue-800 text-white p-8 rounded-2xl shadow-lg text-center">
+                    <h2 class="text-2xl font-bold mb-4">Kesimpulan</h2>
+                    <p class="text-blue-100 mb-6">
+                        Teknologi dan pedagogi gamifikasi direka untuk memperkasakan pendidik. Dengan menguasai teknik ini, anda dapat mengurangkan isu disiplin, meningkatkan penglibatan aktif pelajar, dan menjadikan pengalaman belajar jauh lebih bermakna. Tahniah kerana menamatkan modul ini!
+                    </p>
+                    <button class="bg-unimapGold text-unimapBlue font-bold py-2 px-6 rounded-full hover:bg-yellow-400 transition-colors shadow">
+                        <i class="ph ph-download-simple"></i> Muat Turun Sijil Penyertaan
+                    </button>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-gray-100">
+                    <h3 class="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
+                        <i class="ph ph-chat-circle-text text-unimapBlue"></i> Perbincangan Komuniti & Maklum Balas
+                    </h3>
+                    <p class="text-sm text-gray-600 mb-6">Kongsi pandangan praktikal anda bersama rakan guru yang lain.</p>
+                    
+                    <form id="feedbackForm" class="space-y-4" onsubmit="submitFeedback(event)">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Nama</label>
+                                <input type="text" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-unimapBlue focus:border-unimapBlue outline-none" placeholder="Cikgu Aisyah">
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-1">Jabatan / Panitia</label>
+                                <input type="text" required class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-unimapBlue focus:border-unimapBlue outline-none" placeholder="Panitia Sains">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Pandangan Anda</label>
+                            <textarea required rows="4" class="w-full border border-gray-300 rounded-lg p-3 focus:ring-2 focus:ring-unimapBlue focus:border-unimapBlue outline-none" placeholder="Saya rasa elemen papan pendahulu amat berguna kerana..."></textarea>
+                        </div>
+                        <button type="submit" class="bg-gray-900 text-white font-bold py-3 px-6 rounded-lg hover:bg-gray-800 transition-colors">
+                            Kirim ke Forum
+                        </button>
+                    </form>
+
+                    <div class="mt-8 border-t pt-6 space-y-4" id="discussionBoard">
+                        <div class="flex gap-4 p-4 bg-gray-50 rounded-lg border border-gray-100">
+                            <div class="w-10 h-10 rounded-full bg-blue-200 flex items-center justify-center text-unimapBlue font-bold shrink-0">AK</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Ahmad Kamal <span class="text-xs font-normal text-gray-500 ml-2">2 jam yang lalu</span></h4>
+                                <p class="text-sm text-gray-700 mt-1">Video pembelajaran itu sangat membantu. Saya cuba menggunakan kuiz berbentuk permainan hari ini dan keterujaan murid-murid saya memang di luar jangkaan!</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <footer class="bg-gray-900 text-gray-400 py-12 border-t border-gray-800 mt-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+                <div class="flex items-center gap-2 mb-4 text-white">
+                    <i class="ph ph-graduation-cap text-2xl text-unimapGold"></i>
+                    <span class="font-bold text-lg">EduTech Mastery</span>
+                </div>
+                <p class="text-sm leading-relaxed">Berdedikasi untuk meningkatkan kompetensi guru melalui modul pedagogi inovatif.</p>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Pautan Pantas</h4>
+                <ul class="space-y-2 text-sm">
+                    <li><a href="#" class="hover:text-unimapGold transition-colors">Mengenai Projek</a></li>
+                    <li><a href="#" class="hover:text-unimapGold transition-colors">Manual Pengajar</a></li>
+                    <li><a href="#" class="hover:text-unimapGold transition-colors">Bantuan Teknikal</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-4 uppercase text-sm tracking-wider">Kongsi & Hebahkan</h4>
+                <div class="flex gap-3 text-xl">
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-unimapBlue hover:text-white transition-colors"><i class="ph ph-facebook-logo"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-blue-400 hover:text-white transition-colors"><i class="ph ph-twitter-logo"></i></a>
+                    <a href="#" class="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-green-500 hover:text-white transition-colors"><i class="ph ph-whatsapp-logo"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Logik Navigasi Halaman
+        function showPage(pageId) {
+            const pages = document.querySelectorAll('.page-section');
+            pages.forEach(page => {
+                page.classList.remove('active');
+            });
+
+            const targetPage = document.getElementById(pageId);
+            if(targetPage) {
+                targetPage.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            const sidebarLinks = document.querySelectorAll('#sidebar-menu a');
+            sidebarLinks.forEach(link => {
+                link.className = 'flex items-center gap-2 text-gray-600 hover:text-unimapBlue font-medium';
+            });
+            
+            const activeLink = document.getElementById('nav-' + pageId);
+            if(activeLink) {
+                activeLink.className = 'flex items-center gap-2 text-unimapBlue font-bold';
+            }
+        }
+
+        // --- Logik Makmal RPH (Pembina Bebas) ---
+        let selectedGamification = new Set();
+
+        function toggleElement(elementName, btnElement) {
+            if (selectedGamification.has(elementName)) {
+                selectedGamification.delete(elementName);
+                btnElement.classList.remove('border-unimapBlue', 'bg-blue-50', 'ring-2', 'ring-blue-200');
+            } else {
+                selectedGamification.add(elementName);
+                btnElement.classList.add('border-unimapBlue', 'bg-blue-50', 'ring-2', 'ring-blue-200');
+            }
+
+            document.getElementById('selected-count').innerText = selectedGamification.size;
+            document.getElementById('rph-error').classList.add('hidden');
+        }
+
+        function generateCustomRPH() {
+            const topic = document.getElementById('rph-topic').value.trim();
+            const original = document.getElementById('rph-original').value.trim();
+            const newRph = document.getElementById('rph-new').value.trim();
+            const errorDiv = document.getElementById('rph-error');
+
+            // Validasi Input
+            if (topic === '' || original === '' || newRph === '' || selectedGamification.size < 3) {
+                errorDiv.classList.remove('hidden');
+                return;
+            }
+
+            errorDiv.classList.add('hidden');
+
+            // Populate Kad Keputusan
+            document.getElementById('res-topic').innerText = topic;
+            document.getElementById('res-original').innerText = original;
+            document.getElementById('res-new').innerText = newRph;
+            
+            // Populate Tags Elemen
+            const elementsDiv = document.getElementById('res-elements');
+            elementsDiv.innerHTML = '';
+            selectedGamification.forEach(item => {
+                const tag = document.createElement('span');
+                tag.className = 'bg-blue-100 text-unimapBlue text-xs font-bold px-2 py-1 rounded-full border border-blue-200';
+                tag.innerText = item;
+                elementsDiv.appendChild(tag);
+            });
+
+            // Tunjuk Kad
+            const resultPanel = document.getElementById('rph-result');
+            resultPanel.classList.remove('hidden');
+            
+            setTimeout(() => {
+                resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 100);
+        }
+
+        // --- Assessment Logic: Bahagian A ---
+        function submitQuiz() {
+            const form = document.getElementById('quizForm');
+            const q1 = form.elements['q1'].value;
+            const q2 = form.elements['q2'].value;
+            const resultBox = document.getElementById('quizResult');
+            
+            let score = 0;
+            if (q1 === 'correct') score++;
+            if (q2 === 'correct') score++;
+
+            resultBox.classList.remove('hidden', 'bg-green-50', 'bg-yellow-50', 'border-green-200', 'border-yellow-200', 'text-green-800', 'text-yellow-800');
+            
+            if (score === 2) {
+                resultBox.classList.add('bg-green-50', 'border-green-200', 'text-green-800');
+                resultBox.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="ph-fill ph-check-circle text-2xl text-green-600"></i>
+                        <div>
+                            <p class="font-bold">Tahniah! Skor: 2/2.</p>
+                            <p class="text-sm">Anda mempunyai pemahaman yang kukuh mengenai konsep gamifikasi.</p>
+                        </div>
+                    </div>`;
+            } else {
+                resultBox.classList.add('bg-yellow-50', 'border-yellow-200', 'text-yellow-800');
+                resultBox.innerHTML = `
+                    <div class="flex items-center gap-3">
+                        <i class="ph-fill ph-warning-circle text-2xl text-yellow-600"></i>
+                        <div>
+                            <p class="font-bold">Percubaan yang baik! Skor: ${score}/2.</p>
+                            <p class="text-sm">Sila buat rujukan semula pada bahagian "Konsep Topik" dan cuba lagi.</p>
+                        </div>
+                    </div>`;
+            }
+        }
+
+        // --- Live Poll ---
+        const pollData = {
+            'Kahoot!': { votes: 145, color: 'bg-purple-600' },
+            'Quizizz': { votes: 112, color: 'bg-purple-500' },
+            'ClassDojo': { votes: 85, color: 'bg-green-400' },
+            'Google Classroom': { votes: 68, color: 'bg-yellow-500' }
+        };
+
+        function submitPoll(selectedPlatform) {
+            pollData[selectedPlatform].votes += 1;
+
+            let totalVotes = 0;
+            for (let key in pollData) {
+                totalVotes += pollData[key].votes;
+            }
+
+            document.getElementById('pollOptions').classList.add('hidden');
+            const resultsContainer = document.getElementById('pollResults');
+            resultsContainer.classList.remove('hidden');
+
+            const sortedPlatforms = Object.keys(pollData).sort((a, b) => pollData[b].votes - pollData[a].votes);
+
+            let resultsHTML = `
+                <div class="flex items-center gap-3 mb-6">
+                    <i class="ph-fill ph-check-circle text-2xl text-green-500"></i>
+                    <p class="font-bold text-gray-800">Undian direkodkan! Berikut adalah statistik daripada ${totalVotes} orang guru:</p>
+                </div>
+                <div class="space-y-5">
+            `;
+
+            sortedPlatforms.forEach(platform => {
+                const data = pollData[platform];
+                const percentage = Math.round((data.votes / totalVotes) * 100);
+                const isSelected = platform === selectedPlatform;
+                
+                resultsHTML += `
+                    <div>
+                        <div class="flex justify-between text-sm font-bold mb-2">
+                            <span class="text-gray-800">${platform} ${isSelected ? '<span class="text-xs bg-unimapGold text-unimapBlue px-2 py-0.5 rounded ml-2">Pilihan Anda</span>' : ''}</span>
+                            <span class="text-gray-900">${percentage}% (${data.votes})</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-3">
+                            <div class="${data.color} h-3 rounded-full transition-all duration-1000 ease-out" style="width: 0%" data-width="${percentage}%"></div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            resultsHTML += `</div>`;
+            resultsContainer.innerHTML = resultsHTML;
+
+            setTimeout(() => {
+                const bars = resultsContainer.querySelectorAll('[data-width]');
+                bars.forEach(bar => {
+                    bar.style.width = bar.getAttribute('data-width');
+                });
+            }, 100);
+        }
+
+        // --- Feedback Form ---
+        function submitFeedback(e) {
+            e.preventDefault();
+            const form = e.target;
+            const name = form.elements[0].value;
+            const thoughts = form.elements[2].value;
+            
+            const board = document.getElementById('discussionBoard');
+            const initials = name.substring(0, 2).toUpperCase();
+
+            const newPost = `
+                <div class="flex gap-4 p-4 bg-blue-50 rounded-lg border border-blue-100 animate-pulse">
+                    <div class="w-10 h-10 rounded-full bg-unimapBlue flex items-center justify-center text-white font-bold shrink-0">${initials}</div>
+                    <div>
+                        <h4 class="font-bold text-sm text-gray-900">${name} <span class="text-xs font-normal text-unimapBlue ml-2">Baru sahaja</span></h4>
+                        <p class="text-sm text-gray-700 mt-1">${thoughts}</p>
+                    </div>
+                </div>
+            `;
+            
+            board.insertAdjacentHTML('afterbegin', newPost);
+            form.reset();
+
+            setTimeout(() => {
+                board.firstElementChild.classList.remove('animate-pulse');
+            }, 1000);
+        }
+
+        // --- Video Player Logic ---
+        function playVideo() {
+            const container = document.getElementById('video-container');
+            // Gantikan thumbnail dengan iframe video Youtube (autoplay aktif)
+            container.innerHTML = `<iframe class="w-full h-full absolute inset-0" src="https://www.youtube.com/embed/UQ8iLLl3kyQ?autoplay=1&rel=0" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            container.onclick = null; // Buang fungsi klik supaya video tidak terganggu
+            container.classList.remove('cursor-pointer', 'group');
+        }
+    </script>
+</body>
+</html>
